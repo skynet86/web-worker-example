@@ -1,4 +1,4 @@
-# web-worker-example
+# Web Worker example
 
 Life before Web-Workers,
 
@@ -6,7 +6,7 @@ JavaScript is single-threaded. As a result, long-lasting computations (not neces
 
 An answer to that problem is, 
 
-HTML5 Web Workers. 
+"HTML5 Web Workers"
 
 Web workers provide background-processing capabilities to web applications and typically run on separate threads so that JavaScript applications using Web Workers can take advantage of multicore CPUs. 
 HTML5 is the fifth and current major version of the HTML standard.
