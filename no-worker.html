@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1 id="dt"></h1>
+    <h3>No Worker - Plain HTML/JS</h3>
+    <button id="clickme" onclick="longProcess()" style="background-color: lightpink;padding: 10px 25px;text-align: center;text-decoration: none;display: inline-block;font-size: 13px;">Long Process - Hit Me !!</button>
+    <b><h4 id="cc"></h4></b>
+    <script>
+        function longProcess()
+        {   
+            document.getElementById("cc").innerHTML = "";
+            var i;
+            for (i=0; i < 300000000; i++)
+            {
+                Math.random();
+            }
+            document.getElementById("cc").innerHTML = i.toString()+" Iterations are done.";
+            console.log("Done");
+        }
+        function displayTime(){
+            var d = new Date();
+            return d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString()
+        }
+
+        setInterval(function(){document.getElementById("dt").innerHTML = displayTime();},500)
+    </script>    
+    <br />
+    <h3>With Worker - Plain HTML/JS</h3>
+    <p id="msg"></p>
+    <button id="clickmewk" onclick="startWorker()" style="background-color: lightgoldenrodyellow;padding: 10px 25px;text-align: center;text-decoration: none;display: inline-block;font-size: 13px;" >Long Process - with web worker !!</button>
+    <b><h4 id="ccw"></h4></b>
+    <script>
+        var w;
+        function startWorker() {
+            document.getElementById("ccw").innerHTML = "";
+            if(typeof(Worker) !== "undefined") {
+                w = new Worker("demo_wk.js");
+                w.onmessage = function(event) {
+                    document.getElementById("ccw").innerHTML = event.data.toString()+" Iterations are done.";
+                };
+            } else {
+                document.getElementById("msg").innerHTML = "Sorry, your browser does not support Web Workers...";
+            }
+        }
+        function stopWorker() { 
+            w.terminate();
+            w = undefined;
+        }
+    </script>
+</body>
+</html>
+
+
